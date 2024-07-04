@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+  --w-column:200px;
+}
+*{
+  margin: 0;
+  & body{
+    background-color: #010f24;
+    font-family: poppins;
+    font-size: 12px;
+    color: white;
+    & *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    & header{
+      max-width: 1200px;
+      width: 90vh;
+      padding-top:20px ;
+      position: fixed;
+      z-index: 10;
+      left: 50%;
+      transform: translateX(-50%);
+      & nav{
+        display: flex;
+        gap: 20px;
+        height: 50px;
+        position: relative;
+        /* z-index: 110; */
+        & a{
+          text-decoration: none;
+          font-weight: bold;
+          color: white;
+        }
+      }
+    }
+    & .carousel{
+      background-image: radial-gradient(#687a96, #010f24);
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      & .list{
+        width: min(1200px, 90vw);
+        height: 100%;
+        position: relative;
+        margin: auto;
+        /* border: white solid 1px; */
+
+        & .item{
+          position: absolute;
+          inset: 0;
+          /* border: white solid 1px; */
+
+          & figure{
+            position: absolute;
+            width: 70%;
+            top: 50%;
+            transform: translateY(-50%);
+            & img{
+              width: 100%;
+              transform: rotate(-30deg);
+            }
+            & ::before{
+              content: '';
+              position: absolute;
+              background-color: #0b0b0b;
+              width: 100%;
+              height: 100px;
+              top: 150%;
+              left: 50px;
+              border-radius: 50%;
+              filter: blur(50px);
+            }
+          }
+          & .content{
+            position: absolute;
+            z-index: 20;
+            width: 70%;
+            height: 100%;
+            right: var(--w-column);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: end;
+            gap: 20px;
+            & .category{
+              font-weight: 500;
+            }
+            & .title{
+              font-family: League Gothic;
+              line-height: 1em;
+              font-size: 11em;
+            }
+            & .description{
+              color: #fff8;
+              max-width: 400px;
+              font-size: small;
+              text-align: right;
+            }
+            & .more{
+              display: grid;
+              grid-template-columns: repeat(2, 120px);
+              gap: 20px;
+              grid-template-rows: 33px;
+              & button{
+                border-radius: 30px;
+                font-family: League Gothic;
+                text-transform: uppercase;
+                color: #fff;
+                border: none;
+                background-color: transparent;
+              }
+              & :nth-child(1){
+                background-image: linear-gradient(to right ,#81baa0, #46a39c);
+              }
+              & :nth-child(2){
+                border: 2px solid transparent;
+                background: 
+                  linear-gradient(#242745, #242745) padding-box, linear-gradient(to right, #81baa0, #46a39c) border-box;
+              }
+            }
+          }
+        }
+        &::after{
+          content: '';
+          right: var(--w-column);
+          width: var(--w-column);
+          position: absolute;
+          height: 100%;
+          border-left: 1px solid #324073;
+          border-right: 1px solid #324073;
+          pointer-events: none;
+        }
+        &::before{
+          content: '';
+          position: absolute;
+          height: var(--w-column);
+          width: 100%;
+          border-top: 1px solid #324073;
+          border-bottom: 1px solid #324073;
+          top: 52%;
+          pointer-events: none;
+        }
+      }
+      & .arrows{
+        width: min(1200px, 90vw);
+        position: absolute;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -25px);
+        pointer-events: none;
+        z-index: 200;
+        display: flex;
+        justify-content: space-between;
+        & button{
+          width: 50px;
+          height: 50px;
+          break-before: 50%;
+          border: 1px solid #659cdf55;
+          background-color: #2e2f58;
+          color: #fff7;
+          border-radius: 50%;
+          font-family: monospace;
+          font-size: large;
+          pointer-events: auto;
+          transition: 0.5s;
+          &:hover{
+            border: 1px solid #659cdf;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+      & .indicators{
+        position: absolute;
+        top: 52%;
+        height: var(--w-column);
+        width: min(1200px, 90vw);
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        pointer-events: none;
+        justify-content: end;
+        gap: 10px;
+        & .number{
+          font-family: League Gothic;
+          font-size: 7vw;
+        }
+        & ul{
+          display: flex;
+          gap: 10px;
+          & li{
+            width: 50px;
+            height: 5px;
+            background-color: #659cdf;
+            border-radius: 10px;
+            pointer-events: auto;
+            cursor: pointer;
+            &.active{
+              background-color: yellow;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* animation */
+body{
+  & .carousel{
+    --calculation: 1;
+    & .list{
+      & .item{
+        transition: 0.5s;
+        transform: translateX(calc(100vw * var(--calculation))) ;
+        opacity: 0;
+        & figure{
+          & img{
+            transform: rotate(0deg);
+            transition: 0.5s;
+            transition-delay: 0.3s;
+          }
+        }
+        & .content{
+          & .category, h2, .description, .more{
+            transform: translateX(calc(200px * var(--calculation)));
+            transition: 0.7s;
+            opacity: 0;
+            transition-delay: 0.3s;
+          }
+          & h2{
+            transition-delay: 0.5s;
+          }
+          & .description{
+            transition-delay: 0.7s;
+          }
+          & .more{
+            transition-delay: 0.9s;
+          }
+        }
+        }
+        & .active{
+          opacity: 1;
+          transform: translateX(0);
+          & figure{
+            & img{
+              transform: rotate(-30deg);
+            }
+          }
+          & .content{
+            & .category, h2, .description, .more{
+              transform: translateX(0);
+              opacity: 1;
+            }
+          }
+      }
+    }
+  }
+}
+
+/* responsive design */
+/* ipad */
+@media screen and (max-width: 1024px) and (min-width: 767px) {
+  body{
+    --w-column:100px;
+    & header{
+      width: 90vw;
+      margin: auto;
+    }
+    & .carousel{
+      height: 60vh;
+      & .list{
+        & .item{
+          & .content{
+            & h2(
+              font-size: 5em;
+            )
+          }
+        }
+      }
+      & .indicators{
+        top: 60%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 730px) {
+  body{
+    --w-column:50px;
+    & header{
+      width: 90vw;
+      margin: auto;
+    }
+    & .carousel{
+      & .list{
+        & .item {
+          & figure{
+            width: 100%;
+            top: 40%;
+          }
+          & .content{
+            justify-content: end;
+            padding-bottom: 100px;
+            & .title{
+              font-size: 5em;
+            }
+          }
+        }
+      }
+      & .indicators{
+        & .number{
+          padding-left: 50px;
+          font-size: 7em;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
